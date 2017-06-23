@@ -1,6 +1,7 @@
 import Expo from 'expo';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { Card, Button } from 'react-native-elements';
 import Deck from './src/Deck';
 
 const DATA = [
@@ -17,7 +18,39 @@ const DATA = [
 class App extends React.Component {
   renderCard(item) {
     return (
-      <Text>{item.text}</Text>
+      <Card
+        key={item.id}
+        title={item.text}
+        image={{ uri: item.uri }}
+      >
+        <Text style={{ marginBottom: 10 }}>
+          I can customize the card further
+        </Text>
+        <Button
+          icon={{ name: 'explore' }}
+          backgroundColor="#03A9F4"
+          title="View Now!"
+        >
+        </Button>
+      </Card>
+    )
+  }
+
+  renderNoMoreCards() {
+    return (
+      <Card title="All Done">
+        <Text style={{ marginBottom: 10 }}>
+          That's all folks!!!
+        </Text>
+        <Button
+          backgroundColor="#03A9F4"
+          title="Show all shows again"
+        />
+        <Button
+          backgroundColor="#03A9F4"
+          title="Home"
+        />
+      </Card>
     )
   }
 
@@ -27,6 +60,7 @@ class App extends React.Component {
         <Deck
           data={DATA}
           renderCard={this.renderCard}
+          renderNoMoreCards={this.renderNoMoreCards}
         />
       </View>
     );
@@ -36,7 +70,7 @@ class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#30323D'
+    backgroundColor: '#FFF'
   },
 });
 
